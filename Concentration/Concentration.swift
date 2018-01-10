@@ -11,6 +11,7 @@ import Foundation
 class Concentration
 {
     var cards = [Card]()
+    var flipCount = 0
     
     var indexOfOneAndOnlyFaceUpCard: Int?
     
@@ -23,9 +24,11 @@ class Concentration
     }
     
     func chooseCard(at index: Int){
-        //Flip the card over
         if !cards[index].isMatched {
-            cards[index].isFaceUp = !cards[index].isFaceUp
+            //increase the flip count if you've turned a card over
+            if !cards[index].isFaceUp {
+                flipCount += 1
+            }
             
             //If indexOfOneAndOnlyFaceUpCard is set, then this is the 2nd card being turned over
             //so we need to check for a match. Otherwise turn all cards face down

@@ -14,6 +14,8 @@ class ViewController: UIViewController {
     
     @IBOutlet var cardButtons: [UIButton]!
     
+    @IBOutlet weak var flipCountLabel: UILabel!
+    
     @IBAction func touchCard(_ sender: UIButton)
     {
         if let index = cardButtons.index(of: sender) {
@@ -26,6 +28,8 @@ class ViewController: UIViewController {
     
     func updateViewFromModel()
     {
+        flipCountLabel.text = "Flips: \(game.flipCount)"
+        
         for index in cardButtons.indices {
             let card = game.cards[index]
             let button = cardButtons[index]
