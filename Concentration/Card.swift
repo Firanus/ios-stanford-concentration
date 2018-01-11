@@ -12,6 +12,7 @@ struct Card
 {
     var isMatched = false
     var isFaceUp = false
+    var hasBeenFlippedAtLeastOnce = false
     let identifier: Int
     
     static var identifierFactory = 0
