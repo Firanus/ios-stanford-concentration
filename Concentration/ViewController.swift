@@ -29,8 +29,7 @@ class ViewController: UIViewController {
         
         func selectGameTheme() -> GameTheme {
             let themes = getThemes()
-            let randomIndex = Int(arc4random_uniform(UInt32(themes.count)))
-            return themes[randomIndex]
+            return themes[themes.count.arc4random]
         }
         
         theme = selectGameTheme()
@@ -109,10 +108,21 @@ class ViewController: UIViewController {
     
     private func emoji(for card: Card) -> String {
         if emoji[card.identifier] == nil {
-            let randomIndex = Int(arc4random_uniform(UInt32(unusedEmojis.count)))
-            emoji[card.identifier] = unusedEmojis.remove(at: randomIndex)
+            emoji[card.identifier] = unusedEmojis.remove(at: unusedEmojis.count.arc4random)
         }
         return emoji[card.identifier] ?? "?"
+    }
+}
+
+extension Int {
+    var arc4random: Int {
+        if self > 0 {
+            return Int(arc4random_uniform(UInt32(self)))
+        } else if self < 0 {
+            return -Int(arc4random_uniform(UInt32(abs(self))))
+        } else {
+            return 0
+        }
     }
 }
 
