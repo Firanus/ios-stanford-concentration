@@ -15,9 +15,9 @@ class ViewController: UIViewController {
         
         setGameTheme()
     }
-    var theme: GameTheme!
+    private var theme: GameTheme!
     
-    func setGameTheme() {
+    private func setGameTheme() {
         func getThemes() -> [GameTheme] {
             var themes = [GameTheme]()
             themes.append(GameTheme(name: "Halloween",primaryColor: #colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 1), secondaryColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), emojiChoices: ["🦇","😱", "🙀", "😈", "🎃", "👻", "🍭", "🍬", "🍎"]))
@@ -47,13 +47,13 @@ class ViewController: UIViewController {
     }
     
     
-    lazy var game = Concentration(numberOfCards: cardButtons.count)
+    private lazy var game = Concentration(numberOfCards: cardButtons.count)
     
-    @IBOutlet var cardButtons: [UIButton]!
+    @IBOutlet private var cardButtons: [UIButton]!
     
-    @IBOutlet weak var scoreLabel: UILabel!
+    @IBOutlet private weak var scoreLabel: UILabel!
     
-    @IBAction func touchCard(_ sender: UIButton)
+    @IBAction private func touchCard(_ sender: UIButton)
     {
         if let index = cardButtons.index(of: sender) {
             game.chooseCard(at: index)
@@ -63,9 +63,9 @@ class ViewController: UIViewController {
         }
     }
     
-    @IBOutlet weak var gameCompleteLabel: UILabel!
-    @IBOutlet weak var newGameButton: UIButton!
-    @IBAction func touchNewGameButton(_ sender: UIButton) {
+    @IBOutlet private weak var gameCompleteLabel: UILabel!
+    @IBOutlet private weak var newGameButton: UIButton!
+    @IBAction private func touchNewGameButton(_ sender: UIButton) {
         if game.isGameComplete {
             setGameTheme()
             game = Concentration(numberOfCards: cardButtons.count)
@@ -73,7 +73,7 @@ class ViewController: UIViewController {
         }
     }
     
-    func updateViewFromModel()
+    private func updateViewFromModel()
     {
         scoreLabel.text = "Score: \(game.score)"
         
@@ -104,10 +104,10 @@ class ViewController: UIViewController {
     }
     
     //Code for selection of the emojis to appear on cards
-    var emoji = [Int:String]()
-    var unusedEmojis: [String]!
+    private var emoji = [Int:String]()
+    private var unusedEmojis: [String]!
     
-    func emoji(for card: Card) -> String {
+    private func emoji(for card: Card) -> String {
         if emoji[card.identifier] == nil {
             let randomIndex = Int(arc4random_uniform(UInt32(unusedEmojis.count)))
             emoji[card.identifier] = unusedEmojis.remove(at: randomIndex)

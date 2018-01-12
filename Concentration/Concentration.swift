@@ -10,8 +10,8 @@ import Foundation
 
 class Concentration
 {
-    var cards = [Card]()
-    var score = 0
+    private(set) var cards = [Card]()
+    
     var isGameComplete: Bool {
         get {
             for card in cards {
@@ -22,8 +22,10 @@ class Concentration
             return true
         }
     }
-
-    var indexOfOneAndOnlyFaceUpCard: Int? {
+    
+    private(set) var score = 0
+    
+    private var indexOfOneAndOnlyFaceUpCard: Int? {
         get {
             var foundIndex: Int?
             for index in cards.indices {
