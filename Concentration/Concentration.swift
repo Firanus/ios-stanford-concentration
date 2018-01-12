@@ -54,6 +54,7 @@ class Concentration
     }
     
     init(numberOfCards: Int){
+        assert(numberOfCards > 0, "Concentration.init(numberOfCards: \(numberOfCards)): there are fewer than 1 cards in the game")
         let numberOfCardPairs = numberOfCards % 2 == 0 ? numberOfCards / 2 : (numberOfCards + 1) / 2
         for _ in 0..<numberOfCardPairs {
             let card = Card()
@@ -67,6 +68,7 @@ class Concentration
     }
     
     func chooseCard(at index: Int){
+        assert(cards.indices.contains(index), "Concentration.chooseCard(at: \(index)): chosen index not in the card array")
         if !cards[index].isMatched {
             //If we have a faceup card check for a match. Otherwise, update the index.
             if let matchIndex = indexOfOneAndOnlyFaceUpCard, matchIndex != index {
