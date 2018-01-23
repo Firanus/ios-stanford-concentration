@@ -74,7 +74,12 @@ class ViewController: UIViewController {
     
     private func updateViewFromModel()
     {
-        scoreLabel.text = "Score: \(game.score)"
+        let scoreAttributes: [NSAttributedStringKey: Any] = [
+            .strokeWidth : 5.0,
+            .strokeColor : theme.primaryColor
+        ]
+        let attributedString = NSAttributedString(string: "Score: \(game.score)", attributes: scoreAttributes)
+        scoreLabel.attributedText = attributedString
         
         if game.isGameComplete {
             gameCompleteLabel.text = "Well done! Care to try again?"
