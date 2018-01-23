@@ -13,7 +13,7 @@ struct Card
     var isMatched = false
     var isFaceUp = false
     var hasBeenFlippedAtLeastOnce = false
-    let identifier: Int
+    private let identifier: Int
     
     private static var identifierFactory = 0
     
@@ -24,5 +24,15 @@ struct Card
     
     init() {
         identifier = Card.getUniqueIdentifier()
+    }
+}
+
+extension Card: Hashable {
+    static func ==(lhs: Card, rhs: Card) -> Bool {
+        return lhs.identifier == rhs.identifier
+    }
+    
+    var hashValue: Int {
+        return identifier;
     }
 }

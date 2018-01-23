@@ -103,14 +103,14 @@ class ViewController: UIViewController {
     }
     
     //Code for selection of the emojis to appear on cards
-    private var emoji = [Int:String]()
+    private var emoji = [Card:String]()
     private var unusedEmojis: [String]!
     
     private func emoji(for card: Card) -> String {
-        if emoji[card.identifier] == nil {
-            emoji[card.identifier] = unusedEmojis.remove(at: unusedEmojis.count.arc4random)
+        if emoji[card] == nil {
+            emoji[card] = unusedEmojis.remove(at: unusedEmojis.count.arc4random)
         }
-        return emoji[card.identifier] ?? "?"
+        return emoji[card] ?? "?"
     }
 }
 

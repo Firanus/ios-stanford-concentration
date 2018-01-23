@@ -72,7 +72,7 @@ class Concentration
         if !cards[index].isMatched {
             //If we have a faceup card check for a match. Otherwise, update the index.
             if let matchIndex = indexOfOneAndOnlyFaceUpCard, matchIndex != index {
-                if cards[matchIndex].identifier == cards[index].identifier {
+                if cards[matchIndex] == cards[index] {
                     cards[index].isMatched = true
                     cards[matchIndex].isMatched = true
                     score += 2
