@@ -13,5 +13,5 @@ struct GameTheme {
     let name: String
     let primaryColor: UIColor
     let secondaryColor: UIColor
-    let emojiChoices: [String]
+    let emojiChoices: String
 }

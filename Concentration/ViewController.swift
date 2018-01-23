@@ -20,10 +20,10 @@ class ViewController: UIViewController {
     private func setGameTheme() {
         func getThemes() -> [GameTheme] {
             var themes = [GameTheme]()
-            themes.append(GameTheme(name: "Halloween",primaryColor: #colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 1), secondaryColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), emojiChoices: ["🦇","😱", "🙀", "😈", "🎃", "👻", "🍭", "🍬", "🍎"]))
-            themes.append(GameTheme(name: "Sports",primaryColor: #colorLiteral(red: 0.3098039329, green: 0.2039215714, blue: 0.03921568766, alpha: 1), secondaryColor: #colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1), emojiChoices: ["⚽️","🏀", "🏈", "⚾️", "🎾", "🏐", "🏹", "🏉", "🎱"]))
-            themes.append(GameTheme(name: "Religion",primaryColor:#colorLiteral(red: 0.004859850742, green: 0.09608627111, blue: 0.5749928951, alpha: 1), secondaryColor:#colorLiteral(red: 0.9607843161, green: 0.7058823705, blue: 0.200000003, alpha: 1), emojiChoices: ["🏛","💒", "📿", "🙏", "⛩", "🕋", "🕍", "⛪️", "🕌"]))
-            themes.append(GameTheme(name: "Japan",primaryColor:#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1), secondaryColor:#colorLiteral(red: 0.5807225108, green: 0.066734083, blue: 0, alpha: 1), emojiChoices: ["🍶","🥋", "⛩", "🇯🇵", "🔰", "🏯", "🎎", "🏣", "💴"]))
+            themes.append(GameTheme(name: "Halloween",primaryColor: #colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 1), secondaryColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), emojiChoices: "🦇😱🙀😈🎃👻🍭🍬🍎"))
+            themes.append(GameTheme(name: "Sports",primaryColor: #colorLiteral(red: 0.3098039329, green: 0.2039215714, blue: 0.03921568766, alpha: 1), secondaryColor: #colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1), emojiChoices: "⚽️🏀🏈⚾️🎾🏐🏹🏉🎱"))
+            themes.append(GameTheme(name: "Religion",primaryColor:#colorLiteral(red: 0.004859850742, green: 0.09608627111, blue: 0.5749928951, alpha: 1), secondaryColor:#colorLiteral(red: 0.9607843161, green: 0.7058823705, blue: 0.200000003, alpha: 1), emojiChoices: "🏛💒📿🙏⛩🕋🕍⛪️🕌"))
+            themes.append(GameTheme(name: "Japan",primaryColor:#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1), secondaryColor:#colorLiteral(red: 0.5807225108, green: 0.066734083, blue: 0, alpha: 1), emojiChoices: "🍶🥋⛩🇯🇵🔰🏯🎎🏣💴"))
             return themes
         }
         
@@ -104,11 +104,12 @@ class ViewController: UIViewController {
     
     //Code for selection of the emojis to appear on cards
     private var emoji = [Card:String]()
-    private var unusedEmojis: [String]!
+    private var unusedEmojis: String!
     
     private func emoji(for card: Card) -> String {
         if emoji[card] == nil {
-            emoji[card] = unusedEmojis.remove(at: unusedEmojis.count.arc4random)
+            let randomStringIndex = unusedEmojis.index(unusedEmojis.startIndex, offsetBy: unusedEmojis.count.arc4random)
+            emoji[card] = String(unusedEmojis.remove(at: randomStringIndex))
         }
         return emoji[card] ?? "?"
     }
