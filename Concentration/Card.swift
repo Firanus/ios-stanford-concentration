@@ -14,16 +14,15 @@ struct Card
     var isFaceUp = false
     var hasBeenFlippedAtLeastOnce = false
     private let identifier: Int
-    
     private static var identifierFactory = 0
+    
+    init() {
+        identifier = Card.getUniqueIdentifier()
+    }
     
     private static func getUniqueIdentifier() -> Int {
         identifierFactory += 1
         return identifierFactory
-    }
-    
-    init() {
-        identifier = Card.getUniqueIdentifier()
     }
 }
 

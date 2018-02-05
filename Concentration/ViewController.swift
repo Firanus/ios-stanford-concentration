@@ -12,39 +12,22 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setGameTheme()
+        
     }
     private var theme: GameTheme!
     
-    private func setGameTheme() {
-        func getThemes() -> [GameTheme] {
-            var themes = [GameTheme]()
-            themes.append(GameTheme(name: "Halloween",primaryColor: #colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 1), secondaryColor: #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1), emojiChoices: "🦇😱🙀😈🎃👻🍭🍬🍎"))
-            themes.append(GameTheme(name: "Sports",primaryColor: #colorLiteral(red: 0.3098039329, green: 0.2039215714, blue: 0.03921568766, alpha: 1), secondaryColor: #colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1), emojiChoices: "⚽️🏀🏈⚾️🎾🏐🏹🏉🎱"))
-            themes.append(GameTheme(name: "Religion",primaryColor:#colorLiteral(red: 0.004859850742, green: 0.09608627111, blue: 0.5749928951, alpha: 1), secondaryColor:#colorLiteral(red: 0.9607843161, green: 0.7058823705, blue: 0.200000003, alpha: 1), emojiChoices: "🏛💒📿🙏⛩🕋🕍⛪️🕌"))
-            themes.append(GameTheme(name: "Japan",primaryColor:#colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1), secondaryColor:#colorLiteral(red: 0.5807225108, green: 0.066734083, blue: 0, alpha: 1), emojiChoices: "🍶🥋⛩🇯🇵🔰🏯🎎🏣💴"))
-            return themes
-        }
-        
-        func selectGameTheme() -> GameTheme {
-            let themes = getThemes()
-            return themes[themes.count.arc4random]
-        }
-        
-        theme = selectGameTheme()
-        
-        //Set the UI in the app to represent the theme
+    func setGameTheme() {
+        let randomGameThemeInt = GameTheme.count.arc4random
+        theme = GameTheme(rawValue: randomGameThemeInt) ?? GameTheme.Halloween
         self.view.backgroundColor = theme.secondaryColor
         scoreLabel.textColor = theme.primaryColor
         gameCompleteLabel.textColor = theme.primaryColor
         newGameButton.backgroundColor = theme.primaryColor
         newGameButton.setTitleColor(theme.secondaryColor, for: UIControlState.normal)
         unusedEmojis = theme.emojiChoices
-        
         updateViewFromModel()
     }
-    
     
     private lazy var game = Concentration(numberOfCards: cardButtons.count)
     
