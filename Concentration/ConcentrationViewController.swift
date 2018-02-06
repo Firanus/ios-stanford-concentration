@@ -8,23 +8,26 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ConcentrationViewController: UIViewController {
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setGameTheme()
-        
+    var theme: GameTheme! {
+        didSet {
+            implementTheme()
+        }
     }
-    private var theme: GameTheme!
     
-    func setGameTheme() {
+    func chooseRandomGameTheme() {
         let randomGameThemeInt = GameTheme.count.arc4random
         theme = GameTheme(rawValue: randomGameThemeInt) ?? GameTheme.Halloween
+    }
+    
+    private func implementTheme() {
         self.view.backgroundColor = theme.secondaryColor
         scoreLabel.textColor = theme.primaryColor
         gameCompleteLabel.textColor = theme.primaryColor
         newGameButton.backgroundColor = theme.primaryColor
         newGameButton.setTitleColor(theme.secondaryColor, for: UIControlState.normal)
+        emoji = [:]
         unusedEmojis = theme.emojiChoices
         updateViewFromModel()
     }
@@ -49,7 +52,7 @@ class ViewController: UIViewController {
     @IBOutlet private weak var newGameButton: UIButton!
     @IBAction private func touchNewGameButton(_ sender: UIButton) {
         if game.isGameComplete {
-            setGameTheme()
+            chooseRandomGameTheme()
             game = Concentration(numberOfCards: cardButtons.count)
             updateViewFromModel()
         }
@@ -73,7 +76,6 @@ class ViewController: UIViewController {
             newGameButton.backgroundColor = #colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 0)
             newGameButton.setTitle("", for: UIControlState.normal)
         }
-        
         for index in cardButtons.indices {
             let card = game.cards[index]
             let button = cardButtons[index]
